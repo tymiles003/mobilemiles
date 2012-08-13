@@ -1,0 +1,5 @@
+Dual licensed unde LGPL and MIT.
+
+You are free to use and modify this code as you see fit. If you find it useful,
+however, I'd love to hear about it. Send me a message on Github or email to
+zourtney@randomland.net.
