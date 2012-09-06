@@ -1,7 +1,7 @@
 define([
   'jquery',
   './view',
-  'text!tmpl/home.html'
+  'text!tmpl/login.html'
 ], function($, View, template) {
 
   var _super = View.prototype;

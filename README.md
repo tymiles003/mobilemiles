@@ -3,7 +3,7 @@
 
 **Author:** zourtney@randomland.net
 
-**Date:** 2012-08-11
+**Date:** 2012-09-06
 
 ##Overview
 [MobileMiles 2.0](https://github.com/zourtney/mobilemiles/tree/v2) is an updated version of the original fuel mileage tracking web app. The major difference is that it will be leveraging Google Drive's JavaScript APIs so that no server-side component is needed.

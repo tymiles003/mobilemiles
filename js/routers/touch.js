@@ -6,11 +6,11 @@ define([
 
   return BaseRouter.extend({
     routes: {
-      'desktoponly': 'desktopOnly'
+      'mobileonly': 'mobileOnly'
     },
 
-    desktopOnly: function() {
-      // Sample desktop-only route
+    mobileOnly: function() {
+      // Sample mobile only route
     }
   });
 });

@@ -1,10 +1,10 @@
 //     Backbone.js 0.9.2
-
 //     (c) 2010-2012 Jeremy Ashkenas, DocumentCloud Inc.
 //     Backbone may be freely distributed under the MIT license.
 //     For all details and documentation:
 //     http://backbonejs.org
 
+define(['_'], function(_) {
 (function(){
 
   // Initial Setup
@@ -1429,3 +1429,6 @@
   };
 
 }).call(this);
+
+return Backbone.noConflict();
+});
