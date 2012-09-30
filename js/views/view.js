@@ -1,6 +1,8 @@
+/*global define */
+
 define([
   'jquery',
-  '_',
+  'underscore',
   'backbone',
   'modernizr'
 ], function($, _, Backbone, Modernizr) {
@@ -65,9 +67,7 @@ define([
      */
     render: function(markup, model) {
       model = model || this.model;
-      var markup = _.template(markup, model ? model.toJSON() : {});
-
-      this.$el.html(markup);
+      this.$el.html(_.template(markup || '', model ? model.toJSON() : {}));
       return this;
     }
   });

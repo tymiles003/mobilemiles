@@ -1,3 +1,5 @@
+/*global define */
+
 define([
   'jquery',
   './app',
@@ -7,6 +9,8 @@ define([
   var _super = MobileMiles.prototype;
 
   return MobileMiles.extend({
+    me: 'app.desktop',
+
     render: function() {
       return _super.render.call(this, template);
     }

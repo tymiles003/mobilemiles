@@ -4,7 +4,7 @@
 //     For all details and documentation:
 //     http://backbonejs.org
 
-define(['_'], function(_) {
+define(['underscore'], function(_) {
 (function(){
 
   // Initial Setup

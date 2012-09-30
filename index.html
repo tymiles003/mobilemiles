@@ -3,7 +3,21 @@
 <head>
   <title>MobileMiles</title>
   <link rel="stylesheet" href="css/style.css">
-  <script data-main="js/main" src="js/lib/require-jquery.js"></script>
+  <!--<script data-main="js/main" src="js/lib/require-jquery.js"></script>-->
+  <script src="js/lib/curl.js"></script>
+  <script type="text/javascript">
+    // No auto-loading via 'data-main' attribute yet...
+    //   https://github.com/cujojs/curl/issues/85
+    curl({apiName: 'require'}, ['js/main']);
+  </script>
+  <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+  <script type="text/javascript">
+    // Use a button to handle authentication the first time.
+  window.handleClientLoad = function() {
+    console.log('glorious!');
+    debugger;
+  }
+  </script>
 </head>
 <body>
 </body>

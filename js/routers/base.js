@@ -1,15 +1,19 @@
+/*global define,require */
+
 define([
   'jquery',
-  '_',
+  'underscore',
   'backbone'
 ], function($, _, Backbone) {
   var _routes,
-      _onViewLoaded;
+      _onViewLoaded,
+      _mergeRoutes;
 
   _routes = {
     '': 'home',
     'home': 'home',
-    'login': 'login'
+    'login': 'login',
+    'list': 'list'
   };
 
   _onViewLoaded = function(TheClass) {
@@ -33,7 +37,7 @@ define([
     // Call internal bind function.
     this._bindRoutes();
 
-    // Restore original routes, plus the merges ones from `_routes`.
+    // Restore original routes, plus the merged ones from `_routes`.
     //_.extend(this.routes, originalRoutes);
   };
 
@@ -56,6 +60,10 @@ define([
 
     login: function() {
       this.load.call(this, 'views/login.page');
+    },
+
+    list: function() {
+      this.load.call(this, 'views/list.page');
     }
   });
 });

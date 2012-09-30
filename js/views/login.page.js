@@ -1,3 +1,5 @@
+/*global define */
+
 define([
   'jquery',
   './view',
@@ -7,6 +9,8 @@ define([
   var _super = View.prototype;
 
   return View.extend({
+    me: 'login.page',
+
     render: function() {
       return _super.render.call(this, template);
     }

@@ -1,14 +1,24 @@
+/*global define */
+
 define([
   'jquery',
-  './view',
+  './page',
   'text!tmpl/home.html'
-], function($, View, template) {
+], function($, Page, template) {
 
-  var _super = View.prototype;
+  var _super = Page.prototype;
 
-  return View.extend({
-    render: function() {
-      return _super.render.call(this, template);
+  return Page.extend({
+    me: 'home.page',
+
+    id: 'homepage',
+    
+    unauthorized: function() {
+      _super.unauthorized.call(this);
+    },
+
+    authorized: function() {
+      return this.render(template);
     }
   });
 });
