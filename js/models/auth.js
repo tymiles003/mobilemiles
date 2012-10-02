@@ -68,7 +68,9 @@ define([
     }
     else if (I.authorized) {
       console.log('returning pre-authorized instance');
-      I.trigger('authorized');
+      window.setTimeout(function() {
+        I.trigger('authorized');
+      }, 1);
     }
     else {
       console.log('instantiated but not yet authorized...wait for "authorized" event');

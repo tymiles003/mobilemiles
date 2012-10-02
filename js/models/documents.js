@@ -16,14 +16,16 @@ define([
     }
 
     gapi.client.load('drive', 'v2', function() {
-      var request = self.requestFunction()({q: self.requestFilter});
+      var request = self.requestFunction()({q: q});
 
       request.execute(function(resp) {
         if (resp) {
           items = resp.items;
-          for (i = 0; i < items.length; i++) {
-            //TODO: filter response object
-            self.add(new Document(items[i]));
+          if (items) {
+            for (i = 0; i < items.length; i++) {
+              //TODO: filter response object
+              self.add(new Document(items[i]));
+            }
           }
 
           self.trigger('reset');

@@ -18,8 +18,12 @@ define([
 
   _onViewLoaded = function(TheClass) {
     this.$viewport.empty();
-    var inst = new TheClass(this.$viewport);
-    inst.render().attach();
+    if (this.view) {
+      this.view.destroy();
+    }
+
+    this.view = new TheClass(this.$viewport);
+    this.view.render().attach();
   };
 
   _mergeRoutes = function() {

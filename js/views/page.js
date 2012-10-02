@@ -27,6 +27,15 @@ define([
       ;
     },
 
+    destroy: function() {
+      this.auth
+        .off('ready', this.authReady)
+        .off('authorizing', this.authorizing)
+        .off('authorized', this.authorized)
+        .off('unauthorized', this.unauthorized)
+      ;
+    },
+
     authReady: function() {
       return this.render(loadingTemplate);
     },

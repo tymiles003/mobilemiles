@@ -11,21 +11,35 @@ define([
 ], function($, _, Page, Auth, Documents, template, rowTemplate) {
 
   var _super = Page.prototype,
-      _onAdd;
+      _onAdd,
+      _onReset;
 
   _onAdd = function(model) {
-
     var markup = _.template(rowTemplate, model.toJSON());
-    $('#vehicle-list').append(markup);
+    this.$el.find('#vehicle-list').append(markup);
+  };
+
+  _onReset = function() {
+    this.$el.find('.loading').hide();
   };
 
   return Page.extend({
     me: 'list.page',
 
+    initialize: function() {
+      _super.initialize.apply(this, arguments);
+      _.bindAll(this, '_onAdd', '_onReset');
+      return this;
+    },
+
     authorized: function() {
       _super.render.call(this, template);
-      var list = new Documents();
-      list.on('add', _onAdd.bind(this));
+      this.$el.find('.loading').show();
+
+      this.list = new Documents()
+        .on('add', _onAdd.bind(this))
+        .on('reset', _onReset.bind(this))
+      ;
     }
   });
 });
