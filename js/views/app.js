@@ -27,18 +27,31 @@ define([
 
     _onViewLoaded: function(TheClass) {
       this.$viewport.empty();
-      if (this.view) {
-        this.view.destroy();
+      if (this.currentPage) {
+        this.currentPage.destroy();
       }
 
-      this.view = new TheClass(this.$viewport);
-      this._setTitle();
-      this.view.render().attach();
+      this.currentPage = new TheClass(this.$viewport);
+      this._setTitlebar();
+      this.currentPage.render().attach();
     },
 
-    _setTitle: function() {
-      var t = this.view ? this.view.title : '';
+    _setTitlebar: function() {
+      var page = this.currentPage,
+          t,
+          b;
+
+      if (page) {
+        t = page.title;
+        b = page.hasBack;
+      }
+      else {
+        t = '';
+        b = false;
+      }
+
       this.titlebar.setTitle(typeof t === 'function' ? t() : t);
+      this.titlebar.showBackButton(typeof b === 'function' ? b() : b);
     },
 
     run: function() {

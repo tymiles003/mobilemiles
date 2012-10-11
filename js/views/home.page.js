@@ -14,6 +14,8 @@ define([
     id: 'homepage',
 
     title: 'Home',
+
+    hasBack: false,
     
     unauthorized: function() {
       _super.unauthorized.call(this);

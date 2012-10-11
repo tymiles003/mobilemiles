@@ -28,12 +28,24 @@ define([
     },
 
     setTitle: function(str) {
-      console.log('settitle:' + str);
       this.$('.text').text(str);
+      return this;
+    },
+
+    showBackButton: function(val) {
+      var $btn = this.$('.back');
+      if (typeof val === 'undefined' || val === true) {
+        $btn.show();
+      }
+      else {
+        $btn.hide();
+      }
+      return this;
     },
 
     goBack: function() {
       window.history.back();
+      return this;
     }
   });
 });

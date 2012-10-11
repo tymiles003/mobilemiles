@@ -12,6 +12,9 @@ define([
   var _super = View.prototype;
 
   return View.extend({
+    // Display the back button?
+    hasBack: true,
+
     initialize: function() {
       _super.initialize.apply(this, arguments);
 
