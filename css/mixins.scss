@@ -1,0 +1,37 @@
+@mixin gradient($color1, $color2) {
+  background: -webkit-gradient(linear, left top, left bottom, from($color1), to($color2));
+  background: -moz-linear-gradient(top,  $color1,  $color2);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$color1', endColorstr='$color2');
+}
+
+@mixin roundTop($val) {
+  border-top-left-radius: $val;
+  border-top-right-radius: $val;
+}
+
+@mixin roundBottom($val) {
+  border-bottom-left-radius: $val;
+    border-bottom-right-radius: $val;
+}
+
+@mixin clickableGradient($color1, $color2) {
+  @include gradient($color1, $color2);
+
+  &:active {
+    @include gradient($color2, $color1);
+  }
+}
+
+@mixin clickablePadding($v, $h, $depth: 1) {
+  padding: $v $h;
+
+  &:active {
+    padding: $v + $depth $h - $depth $v - $depth $h + $depth;
+  }
+}
+
+@mixin fullHeight($offset: 0) {
+  position: absolute;
+  top: $offset;
+  bottom: $offset;
+}

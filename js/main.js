@@ -29,8 +29,13 @@ define([], function() {
       'views/app.' + mode,
       'routers/' + mode
     ], function(MobileMiles, Router) {
-      var app = new MobileMiles().run(),
-          router = new Router(app.$el.find('#content'));
+      var app = new MobileMiles(),
+          router = new Router(app);
+      
+      app
+        .setRouter(router)
+        .run()
+      ;
     });
   });
 });

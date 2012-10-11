@@ -11,32 +11,34 @@ define([
       _apiKey = 'AIzaSyBheS8XJ8VYPsy4xk2UjGdGGANIvnHoCxQ';
 
   Auth = function() {
-    _.bindAll(this, '_onReady', '_checkAuth', '_onAuthResult');
+    _.bindAll(this, '_checkAuth', '_onAuthResult');
     this._checkAuthImmediate = this._checkAuth.bind(this, true);
     return this;
+  };
+
+  window.mobileMilesGapiReady = function() {
+    if (I) {
+      I.trigger('ready');
+
+      // Set API key
+      gapi.client.setApiKey(_apiKey);
+
+      // Check auth
+      window.setTimeout(I._checkAuthImmediate, 1);
+    }
   };
 
   _.extend(Auth.prototype, Backbone.Events, {
     scopes: 'https://www.googleapis.com/auth/drive',
 
     check: function() {
-      require(['js!' + _gapiUrl], this._onReady);
+      require(['js!' + _gapiUrl + '?onload=mobileMilesGapiReady']);
       return this;
     },
 
     prompt: function() {
       this._checkAuth(false);
       return this;
-    },
-
-    _onReady: function() {
-      this.trigger('ready');
-
-      // Set API key
-      gapi.client.setApiKey(_apiKey);
-
-      // Check auth
-      window.setTimeout(this._checkAuthImmediate, 1);
     },
 
     _checkAuth: function(immediate) {

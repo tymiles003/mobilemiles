@@ -1,4 +1,4 @@
-/*global define,require */
+/*global define */
 
 define([
   'jquery',
@@ -6,7 +6,6 @@ define([
   'backbone'
 ], function($, _, Backbone) {
   var _routes,
-      _onViewLoaded,
       _mergeRoutes;
 
   _routes = {
@@ -14,16 +13,6 @@ define([
     'home': 'home',
     'login': 'login',
     'list': 'list'
-  };
-
-  _onViewLoaded = function(TheClass) {
-    this.$viewport.empty();
-    if (this.view) {
-      this.view.destroy();
-    }
-
-    this.view = new TheClass(this.$viewport);
-    this.view.render().attach();
   };
 
   _mergeRoutes = function() {
@@ -46,28 +35,52 @@ define([
   };
 
   return Backbone.Router.extend({
-    initialize: function($viewport) {
+    initialize: function(app) {
       _mergeRoutes.call(this);
-      
-      Backbone.history.start();
-      this.$viewport = $viewport;
+      this.app = app;
     },
 
-    load: function(uri) {
-      //TODO: error handling (useful for connectivity issues)
-      require([uri], _onViewLoaded.bind(this));
+    _getRouteFromHashLocation: function() {
+      var hash = window.location.hash;
+      if (hash.length) {
+        hash = hash.substr(1);
+        if (hash.length && typeof this.routes[hash] !== 'undenfined') {
+          return this.routes[hash];
+        }
+      }
+      return this.routes[''];
+    },
+
+    start: function() {
+      // Start Backbone.history
+      var loc = window.location;
+      Backbone.history.start({
+        pushState: true,
+        silent: true,
+        root: loc.origin + loc.pathname
+      });
+
+      // Go to initial route. Translates hash-url into the proper location, if
+      // needed. Defaults to this.routes[''].
+      this[this._getRouteFromHashLocation()]();
+      return this;
+    },
+
+    stop: function() {
+      Backbone.history.stop();
+      return this;
     },
 
     home: function() {
-      this.load.call(this, 'views/home.page');
+      this.app.load('views/home.page');
     },
 
     login: function() {
-      this.load.call(this, 'views/login.page');
+      this.app.load('views/login.page');
     },
 
     list: function() {
-      this.load.call(this, 'views/list.page');
+      this.app.load('views/list.page');
     }
   });
 });

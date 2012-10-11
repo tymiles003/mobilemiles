@@ -10,6 +10,8 @@ define([
 
   return View.extend({
     me: 'login.page',
+    
+    title: 'Login',
 
     render: function() {
       return _super.render.call(this, template);

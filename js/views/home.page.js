@@ -12,6 +12,8 @@ define([
     me: 'home.page',
 
     id: 'homepage',
+
+    title: 'Home',
     
     unauthorized: function() {
       _super.unauthorized.call(this);

@@ -1,0 +1,102 @@
+@import "./mixins.scss";
+
+$liBorderRadius: 5px;
+$liBorderColor: #ccc;
+
+$liColor1: #fff;
+$liColor2: #eee;
+$liActiveColor1: #eee;
+$liActiveColor2: #fff;
+$liCheckMarkColor: #777;
+$liTextColor: #444;
+$liCheckedTextColor: black;
+
+$titleColor1: #444;
+$titleColor2: black;
+
+$buttonBorderRadius: 5px;
+$buttonBorderColor: #666;
+$buttonColor1: #777;
+$buttonColor2: #444;
+$buttonTextColor: white;
+
+
+body {
+  font-family: 'Muli', 'Open Sans', Arial, sans-serif;
+  background: black;
+}
+
+fieldset {
+  width: 400px;
+  padding: 10px;
+}
+
+fieldset input {
+  margin: 5px;
+  padding: 4px;
+}
+
+button.back {
+  border: 1px solid $buttonBorderColor;
+  border-radius: $buttonBorderRadius;
+  @include clickableGradient($buttonColor1, $buttonColor2);
+  @include clickablePadding(5px, 10px);
+  color: $buttonTextColor;
+}
+
+#titlebar {
+  position: relative;
+  @include gradient($titleColor1, $titleColor2);
+
+  .back {
+    @include fullHeight(7px);
+    left: 5px;
+  }
+
+  .text {
+    font-size: 18px;
+  }
+}
+
+li {
+  list-style: none;
+  border: 1px solid $liBorderColor;
+  @include clickablePadding(30px, 30px);
+  @include clickableGradient($liColor1, $liColor2);
+  
+  &:first-child {
+    @include roundTop($liBorderRadius);
+  }
+
+  &:last-child {
+    @include roundBottom($liBorderRadius);
+  }
+
+  &.checked {
+    .icon .text::before {
+      content: '\2713';  // checkmark
+      font-size: 24px;
+      color: $liCheckMarkColor;
+    }
+
+    .title {
+      color: $liCheckedTextColor;
+    }
+  }
+
+  .row {
+    display: table-row;
+  }
+
+  .icon {
+    display: table-cell;
+    position: relative;
+    width: 40px;
+  }
+
+  .title {
+    color: $liTextColor;
+    display: table-cell;
+    vertical-align: middle;
+  }
+}

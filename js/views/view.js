@@ -42,7 +42,7 @@ define([
      * Attaches `this.$el` to the specified parent.
      */
     attach: function() {
-      this.$el.appendTo(this.$parent);
+      this.$el.appendTo($(this.$parent));
       return this;
     },
 

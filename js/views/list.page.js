@@ -26,20 +26,30 @@ define([
   return Page.extend({
     me: 'list.page',
 
+    title: 'Vehicles',
+
+    events: {
+      'click li': 'changeVechicle'
+    },
+
     initialize: function() {
       _super.initialize.apply(this, arguments);
       _.bindAll(this, '_onAdd', '_onReset');
-      return this;
     },
 
     authorized: function() {
       _super.render.call(this, template);
       this.$el.find('.loading').show();
 
-      this.list = new Documents()
+      this.collection = new Documents()
         .on('add', _onAdd.bind(this))
         .on('reset', _onReset.bind(this))
       ;
+    },
+
+    changeVechicle: function(e) {
+      $('li').removeClass('checked');
+      $(e.currentTarget).addClass('checked');
     }
   });
 });
