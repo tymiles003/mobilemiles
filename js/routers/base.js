@@ -12,7 +12,8 @@ define([
     '': 'home',
     'home': 'home',
     'login': 'login',
-    'list': 'list'
+    'list': 'list',
+    'about': 'about'
   };
 
   _mergeRoutes = function() {
@@ -57,7 +58,7 @@ define([
       Backbone.history.start({
         pushState: true,
         silent: true,
-        root: loc.origin + loc.pathname
+        root: loc.protocol + '//' + loc.host + loc.pathname
       });
 
       // Go to initial route. Translates hash-url into the proper location, if
@@ -81,6 +82,10 @@ define([
 
     list: function() {
       this.app.load('views/list.page');
+    },
+
+    about: function() {
+      this.app.load('views/about.page');
     }
   });
 });

@@ -41,12 +41,9 @@ button.back {
 li {
   list-style: none;
   border: 1px solid #cccccc;
-  padding: 30px 30px;
   background: -webkit-gradient(linear, left top, left bottom, from(white), to(#eeeeee));
   background: -moz-linear-gradient(top, white, #eeeeee);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$color1', endColorstr='$color2'); }
-  li:active {
-    padding: 31px 29px 29px 31px; }
   li:active {
     background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(white));
     background: -moz-linear-gradient(top, #eeeeee, white);
@@ -63,8 +60,11 @@ li {
     color: #777777; }
   li.checked .title {
     color: black; }
-  li .row {
-    display: table-row; }
+  li .row, li a {
+    display: block;
+    padding: 30px 30px; }
+    li .row:active, li a:active {
+      padding: 31px 29px 29px 31px; }
   li .icon {
     display: table-cell;
     position: relative;

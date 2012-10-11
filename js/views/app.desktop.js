@@ -2,11 +2,12 @@
 
 define([
   'jquery',
+  'underscore',
   './app',
   './titlebar',
   'text!tmpl/app.desktop.html',
   'link!css/desktop.css'
-], function($, MobileMiles, Titlebar, template) {
+], function($, _, MobileMiles, Titlebar, template) {
   var _super = MobileMiles.prototype;
 
   return MobileMiles.extend({
@@ -16,14 +17,29 @@ define([
       _super.initialize.apply(this, arguments);
       this.titlebar = new Titlebar('#titlebar');
 
-      var self = this;
-      $('body').on('click', 'a', function(e) {
+      // Link click handler
+      _.bindAll(this, '_clickHandler');
+      $('body').on('click', 'a', this._clickHandler);
+    },
+
+    _clickHandler: function(e) {
+      var t = e.currentTarget,
+          href = t.href,
+          $t = $(t),
+          dataExt = $t.data('external'),
+          ext = dataExt === 'true' || dataExt === true;
+
+      // Let external link process normally
+      if (! ext) {
         e.preventDefault();
-        self.router.navigate('list', {
+      }
+      
+      // Navigate to href location, unless this is a void URL.
+      if (! ext && href !== 'javascript:void(0);' && href !== '#') {
+        this.router.navigate($t.attr('href'), {
           trigger: true
         });
-        return false;
-      });
+      }
     },
 
     render: function() {

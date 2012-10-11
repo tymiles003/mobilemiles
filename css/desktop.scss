@@ -61,9 +61,8 @@ button.back {
 li {
   list-style: none;
   border: 1px solid $liBorderColor;
-  @include clickablePadding(30px, 30px);
   @include clickableGradient($liColor1, $liColor2);
-  
+
   &:first-child {
     @include roundTop($liBorderRadius);
   }
@@ -84,8 +83,9 @@ li {
     }
   }
 
-  .row {
-    display: table-row;
+  .row, a {
+    display: block;
+    @include clickablePadding(30px, 30px);
   }
 
   .icon {
