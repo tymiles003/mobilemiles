@@ -3,8 +3,9 @@
 define([
   'jquery',
   'underscore',
+  'backbone',
   './view'
-], function($, _, View) {
+], function($, _, Backbone, View) {
   var _super = View.prototype;
 
   return View.extend({
@@ -12,7 +13,7 @@ define([
     
     initialize: function() {
       _super.initialize.call(this, 'body');
-      _.bindAll(this, '_onViewLoaded');
+      _.bindAll(this, '_onViewLoaded', '_onUnauthorized');
     },
 
     setRouter: function(r) {
@@ -28,10 +29,12 @@ define([
     _onViewLoaded: function(TheClass) {
       this.$viewport.empty();
       if (this.currentPage) {
+        this.currentPage.off('unauthorized', this._onUnauthorized);
         this.currentPage.destroy();
       }
 
       this.currentPage = new TheClass(this.$viewport);
+      this.currentPage.on('unauthorized', this._onUnauthorized);
       this._setTitlebar();
       this.currentPage.render().attach();
     },
@@ -52,6 +55,10 @@ define([
 
       this.titlebar.setTitle(typeof t === 'function' ? t() : t);
       this.titlebar.showBackButton(typeof b === 'function' ? b() : b);
+    },
+
+    _onUnauthorized: function() {
+      Backbone.history.navigate('login', {trigger: true});
     },
 
     run: function() {

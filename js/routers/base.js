@@ -45,7 +45,7 @@ define([
       var hash = window.location.hash;
       if (hash.length) {
         hash = hash.substr(1);
-        if (hash.length && typeof this.routes[hash] !== 'undenfined') {
+        if (hash.length && typeof this.routes[hash] !== 'undefined') {
           return this.routes[hash];
         }
       }
@@ -57,7 +57,6 @@ define([
       var loc = window.location;
       Backbone.history.start({
         pushState: true,
-        silent: true,
         root: loc.protocol + '//' + loc.host + loc.pathname
       });
 

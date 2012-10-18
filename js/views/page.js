@@ -52,7 +52,9 @@ define([
     authorized: function() { },
 
     unauthorized: function() {
-      return this.render(unauthorizedTemplate);
+      //return this.render(unauthorizedTemplate);
+      this.trigger('unauthorized');
+      return this;
     }
   });
 });
