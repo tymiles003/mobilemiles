@@ -44,7 +44,9 @@ define([
     },
 
     goBack: function() {
-      window.history.back();
+      if (! this.$('.back button').is(':disabled')) {
+        window.history.back();
+      }
       return this;
     }
   });
