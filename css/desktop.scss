@@ -1,29 +1,65 @@
 @import "./mixins.scss";
 
 $liBorderRadius: 5px;
-$liBorderColor: #ccc;
+$liBorderColor: #555;
 
-$liColor1: #fff;
-$liColor2: #eee;
+$liColor1: #323232;
+$liColor2: #232323;
 $liActiveColor1: #eee;
 $liActiveColor2: #fff;
-$liCheckMarkColor: #777;
-$liTextColor: #444;
-$liCheckedTextColor: black;
+$liCheckMarkColor: #eee;
+$liTextColor: #ccc;
+$liCheckedTextColor: white;
 
 $titleColor1: #444;
 $titleColor2: black;
 
-$buttonBorderRadius: 5px;
-$buttonBorderColor: #666;
-$buttonColor1: #777;
-$buttonColor2: #444;
-$buttonTextColor: white;
+$buttonBorderRadius: 25px;
+$buttonBorderColor: #ccc;
+$buttonColor1: #232323;
+$buttonColor2: #323232;
+$buttonTextColor: #eee;
 
 
-body {
-  font-family: 'Muli', 'Open Sans', Arial, sans-serif;
+#content {
   background: black;
+  color: white;
+  padding: 10px 40px;
+  height: 100%;
+}
+
+#titlebar {
+  color: white;
+  padding: 10px;
+}
+
+// See: http://stackoverflow.com/a/8706041/311207
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/k3k702ZOKiLJc3WVjuplzKRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTaRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/MTP_ySUJH_bn48VBG8sNSqRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
 }
 
 fieldset {
@@ -36,25 +72,45 @@ fieldset input {
   padding: 4px;
 }
 
-button.back {
-  border: 1px solid $buttonBorderColor;
-  border-radius: $buttonBorderRadius;
-  @include clickableGradient($buttonColor1, $buttonColor2);
-  @include clickablePadding(5px, 10px);
-  color: $buttonTextColor;
+.back {
+  position: absolute;
+  left: -10px;
+  width: 80px;
+  height: 70px;
+
+  &:hover {
+    button:not(:disabled) {
+      -webkit-transform: translate(10px, 0);
+      -webkit-transition: all 0.1s ease-out;
+    }
+  }
+
+  button {
+    width: 50px;
+    height: 50px;
+    border: 2px solid $buttonBorderColor;
+    border-radius: $buttonBorderRadius;
+
+    @include clickableGradient($buttonColor1, $buttonColor2);
+    @include clickablePadding(5px, 10px);
+    color: $buttonTextColor;
+    font-size: 24px;
+
+    -webkit-transform: translate(-10px, 0);
+    -webkit-transition: all 0.2s ease-out;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
 }
 
 #titlebar {
   position: relative;
   @include gradient($titleColor1, $titleColor2);
 
-  .back {
-    @include fullHeight(7px);
-    left: 5px;
-  }
-
-  .text {
-    font-size: 18px;
+  h1 {
+    padding-left: 60px;
   }
 }
 

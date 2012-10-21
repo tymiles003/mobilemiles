@@ -12,7 +12,7 @@ define([
     me: 'titlebar.view',
 
     events: {
-      'click button.back': 'goBack'
+      'click .back': 'goBack'
     },
 
     initialize: function() {
@@ -28,17 +28,17 @@ define([
     },
 
     setTitle: function(str) {
-      this.$('.text').text(str);
+      this.$('h1').text(str);
       return this;
     },
 
     showBackButton: function(val) {
-      var $btn = this.$('.back');
+      var $btn = this.$('.back button');
       if (typeof val === 'undefined' || val === true) {
-        $btn.show();
+        $btn.removeAttr('disabled');
       }
       else {
-        $btn.hide();
+        $btn.attr('disabled', 'disabled');
       }
       return this;
     },

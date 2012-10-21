@@ -13,7 +13,7 @@ define([
 
     id: 'aboutpage',
 
-    title: 'About',
+    title: 'About MobileMiles',
 
     render: function() {
       return _super.render.call(this, template);
