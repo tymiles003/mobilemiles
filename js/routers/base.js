@@ -12,8 +12,9 @@ define([
     '': 'home',
     'home': 'home',
     'login': 'login',
-    'list': 'list',
-    'about': 'about'
+    'vehicle': 'vehicle',
+    'about': 'about',
+    'recent': 'recent'
   };
 
   _mergeRoutes = function() {
@@ -79,12 +80,16 @@ define([
       this.app.load('views/login.page');
     },
 
-    list: function() {
-      this.app.load('views/list.page');
+    vehicle: function() {
+      this.app.load('views/vehicle.page');
     },
 
     about: function() {
       this.app.load('views/about.page');
+    },
+
+    recent: function() {
+      this.app.load('views/recent.page');
     }
   });
 });

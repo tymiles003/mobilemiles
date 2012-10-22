@@ -15,10 +15,6 @@ define([
       'click .back': 'goBack'
     },
 
-    initialize: function() {
-      _super.initialize.apply(this, arguments);
-    },
-
     render: function() {
       return _super.render.call(this, template);
     },

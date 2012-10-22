@@ -15,7 +15,10 @@ define([
 
     initialize: function() {
       _super.initialize.apply(this, arguments);
-      this.titlebar = new Titlebar('#titlebar');
+      this.titlebar = new Titlebar({
+        app: this,
+        $parent: '#titlebar'
+      });
 
       // Link click handler
       _.bindAll(this, '_clickHandler');

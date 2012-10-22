@@ -33,9 +33,10 @@ define([
     /**
      * Initialize
      */
-    initialize: function($parent) {
+    initialize: function(options) {
       _filterEvents.call(this);
-      this.$parent = $parent;
+      this.app = options.app;
+      this.$parent = options.$parent;
     },
 
     /**
@@ -67,7 +68,16 @@ define([
      */
     render: function(markup, model) {
       model = model || this.model;
-      this.$el.html(_.template(markup || '', model ? model.toJSON() : {}));
+
+      if (! model) {
+        model = {};
+      }
+      else if (typeof model.toJSON === 'function') {
+        model = model.toJSON();
+      }
+      // else: assume type 'Object'
+
+      this.$el.html(_.template(markup || '', model));
       return this;
     }
   });

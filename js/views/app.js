@@ -12,7 +12,11 @@ define([
     id: 'app',
     
     initialize: function() {
-      _super.initialize.call(this, 'body');
+      _super.initialize.call(this, {
+        app: this,
+        $parent: 'body'
+      });
+
       _.bindAll(this, '_onViewLoaded', '_onUnauthorized');
     },
 
@@ -27,13 +31,19 @@ define([
     },
 
     _onViewLoaded: function(TheClass) {
+      // Unload current page
       this.$viewport.empty();
       if (this.currentPage) {
         this.currentPage.off('unauthorized', this._onUnauthorized);
         this.currentPage.destroy();
       }
 
-      this.currentPage = new TheClass(this.$viewport);
+      // Load new page
+      this.currentPage = new TheClass({
+        app: this,
+        $parent: this.$viewport
+      });
+
       this.currentPage.on('unauthorized', this._onUnauthorized);
       this._setTitlebar();
       this.currentPage.render().attach();
@@ -55,6 +65,11 @@ define([
 
       this.titlebar.setTitle(typeof t === 'function' ? t() : t);
       this.titlebar.showBackButton(typeof b === 'function' ? b() : b);
+    },
+
+    setVehicle: function(val) {
+      this.vehicle = val;
+      //TODO: persist
     },
 
     _onUnauthorized: function() {
