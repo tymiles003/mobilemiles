@@ -72,6 +72,10 @@ define([
       //TODO: persist
     },
 
+    getVehicle: function() {
+      return this.vehicle;
+    },
+
     _onUnauthorized: function() {
       Backbone.history.navigate('login', {trigger: true});
     },

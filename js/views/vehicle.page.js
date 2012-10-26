@@ -15,7 +15,15 @@ define([
       _onReset;
 
   _onAdd = function(model) {
-    var markup = _.template(rowTemplate, model.toJSON());
+    var modelID = model && model.get('id'),
+        curVehicle = this.app.getVehicle(),
+        curID = curVehicle && curVehicle.get('id'),
+        markup;
+
+    markup = _.template(rowTemplate, _.extend({}, model.toJSON(), {
+      checked: modelID === curID
+    }));
+
     this.$el.find('#vehicle-list').append(markup);
   };
 
