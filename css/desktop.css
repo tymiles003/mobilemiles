@@ -29,8 +29,8 @@ fieldset input {
     height: 50px;
     border: 2px solid #cccccc;
     border-radius: 25px;
-    background: -webkit-gradient(linear, left top, left bottom, from(#232323), to(#323232));
-    background: -moz-linear-gradient(top, #232323, #323232);
+    background: -webkit-gradient(linear, left top, left bottom, from(#323232), to(#232323));
+    background: -moz-linear-gradient(top, #323232, #232323);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$color1', endColorstr='$color2');
     padding: 5px 10px;
     color: #eeeeee;
@@ -38,8 +38,8 @@ fieldset input {
     -webkit-transform: translate(-10px, 0);
     -webkit-transition: all 0.2s ease-out; }
     .back button:active {
-      background: -webkit-gradient(linear, left top, left bottom, from(#323232), to(#232323));
-      background: -moz-linear-gradient(top, #323232, #232323);
+      background: -webkit-gradient(linear, left top, left bottom, from(#232323), to(#323232));
+      background: -moz-linear-gradient(top, #232323, #323232);
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$color1', endColorstr='$color2'); }
     .back button:active {
       padding: 6px 9px 4px 11px; }
@@ -54,12 +54,23 @@ fieldset input {
   #titlebar h1 {
     padding-left: 60px; }
 
+ul {
+  margin-top: 20px; }
+
 li {
   list-style: none;
-  border: 1px solid #555555;
+  border-top: 1px solid #888888;
+  border-right: 1px solid #555555;
+  border-bottom: 1px solid #555555;
+  border-left: 1px solid #888888;
   background: -webkit-gradient(linear, left top, left bottom, from(#323232), to(#232323));
   background: -moz-linear-gradient(top, #323232, #232323);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$color1', endColorstr='$color2'); }
+  li:active {
+    border-top: 1px solid #555555;
+    border-right: 1px solid #888888;
+    border-bottom: 1px solid #888888;
+    border-left: 1px solid #555555; }
   li:active {
     background: -webkit-gradient(linear, left top, left bottom, from(#232323), to(#323232));
     background: -moz-linear-gradient(top, #232323, #323232);
@@ -89,3 +100,31 @@ li {
     color: #cccccc;
     display: table-cell;
     vertical-align: middle; }
+
+.button {
+  width: 100%;
+  padding: 20px;
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: 100;
+  border-top: 1px solid #888888;
+  border-right: 1px solid #555555;
+  border-bottom: 1px solid #555555;
+  border-left: 1px solid #888888;
+  border-radius: 8px;
+  color: #eeeeee;
+  background: -webkit-gradient(linear, left top, left bottom, from(#323232), to(#232323));
+  background: -moz-linear-gradient(top, #323232, #232323);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$color1', endColorstr='$color2');
+  padding: 25px 10px; }
+  .button:active {
+    border-top: 1px solid #555555;
+    border-right: 1px solid #888888;
+    border-bottom: 1px solid #888888;
+    border-left: 1px solid #555555; }
+  .button:active {
+    background: -webkit-gradient(linear, left top, left bottom, from(#232323), to(#323232));
+    background: -moz-linear-gradient(top, #232323, #323232);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$color1', endColorstr='$color2'); }
+  .button:active {
+    padding: 26px 9px 24px 11px; }

@@ -30,6 +30,20 @@
   }
 }
 
+@mixin clickableBorder($color1, $color2, $width: 1px) {
+  border-top: $width solid $color1;
+  border-right: $width solid $color2;
+  border-bottom: $width solid $color2;
+  border-left: $width solid $color1;
+
+  &:active {
+    border-top: $width solid $color2;
+    border-right: $width solid $color1;
+    border-bottom: $width solid $color1;
+    border-left: $width solid $color2;
+  }
+}
+
 @mixin clickableMargin($v, $h, $depth: 1) {
   margin: $v $h;
 

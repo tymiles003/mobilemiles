@@ -20,6 +20,7 @@ define([
         curID = curVehicle && curVehicle.get('id'),
         markup;
 
+    // Get row markup. Send checked state, based on `app.getVehicle()`
     markup = _.template(rowTemplate, _.extend({}, model.toJSON(), {
       checked: modelID === curID
     }));

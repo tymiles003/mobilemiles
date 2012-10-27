@@ -1,10 +1,6 @@
 @import "./mixins.scss";
 
 $liBorderRadius: 5px;
-$liBorderColor: #555;
-
-$liColor1: #323232;
-$liColor2: #232323;
 $liActiveColor1: #eee;
 $liActiveColor2: #fff;
 $liCheckMarkColor: #eee;
@@ -14,10 +10,13 @@ $liCheckedTextColor: white;
 $titleColor1: #444;
 $titleColor2: black;
 
-$buttonBorderRadius: 25px;
-$buttonBorderColor: #ccc;
-$buttonColor1: #232323;
-$buttonColor2: #323232;
+$buttonBorderRadius: 8px;
+$backButtonBorderRadius: 25px;
+$buttonBorderColor1: #888;
+$buttonBorderColor2: #555;
+$backButtonBorderColor: #ccc;
+$buttonColor1: #323232;
+$buttonColor2: #232323;
 $buttonTextColor: #eee;
 
 
@@ -59,8 +58,8 @@ fieldset input {
   button {
     width: 50px;
     height: 50px;
-    border: 2px solid $buttonBorderColor;
-    border-radius: $buttonBorderRadius;
+    border: 2px solid $backButtonBorderColor;
+    border-radius: $backButtonBorderRadius;
 
     @include clickableGradient($buttonColor1, $buttonColor2);
     @include clickablePadding(5px, 10px);
@@ -85,10 +84,14 @@ fieldset input {
   }
 }
 
+ul {
+  margin-top: 20px;
+}
+
 li {
   list-style: none;
-  border: 1px solid $liBorderColor;
-  @include clickableGradient($liColor1, $liColor2);
+  @include clickableBorder($buttonBorderColor1, $buttonBorderColor2);
+  @include clickableGradient($buttonColor1, $buttonColor2);
 
   &:first-child {
     @include roundTop($liBorderRadius);
@@ -126,4 +129,17 @@ li {
     display: table-cell;
     vertical-align: middle;
   }
+}
+
+.button {
+  width: 100%;
+  padding: 20px;
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: 100;
+  @include clickableBorder($buttonBorderColor1, $buttonBorderColor2);
+  border-radius: $buttonBorderRadius;
+  color: $buttonTextColor;
+  @include clickableGradient($buttonColor1, $buttonColor2);
+  @include clickablePadding(25px, 10px);  
 }
