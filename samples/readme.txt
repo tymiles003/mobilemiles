@@ -1,0 +1,1 @@
+Various samples of connecting to Google services via JavaScript APIs. Used as reference for this app.

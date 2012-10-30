@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Developers</title>
+    <link rel="stylesheet" type="text/css" href="/_static/css/screen.css" />
+    <link rel="stylesheet" href="//www.google.com/cse/style/look/default.css" type="text/css" />
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script id="jqueryui" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js" defer async></script>
+    <script src="//www.google.com/jsapi?key=AIzaSyCZfHRnq7tigC-COeQRmoa9Cxr0vbrK6xw"></script>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body class="docs framebox_body">
+
+<h3>Demo</h3>
+
+<script type="text/javascript">
+<!--
+/**
+ * Lists the entries from the specified JSON feed
+ * by creating a new 'dl' element in the DOM.
+ * Each 'dt' is the title of the row, and each 'dd' 
+ * is the content of the row. 
+ */
+function listEntries(json) {
+
+  removeOldResults();
+  
+  var dl = document.createElement('dl');
+  dl.setAttribute('id', 'output');
+
+  for (var i = 0; i < json.feed.entry.length; i++) {
+    
+    var entry = json.feed.entry[i];
+    
+    var dt = document.createElement('dt');
+    var title = document.createTextNode(entry.title.$t);
+    dt.appendChild(title);
+    
+    var dd = document.createElement('dd');
+    var content = document.createTextNode(entry.content.$t);
+    dd.appendChild(content);
+  
+    dl.appendChild(dt);
+    dl.appendChild(dd);
+  }
+
+  document.getElementById('data').appendChild(dl);
+
+  // Re-enable the ok button.
+  var ok_button = document.getElementById('ok_button');
+  ok_button.removeAttribute('disabled');
+}
+
+/**
+ * Lists the entries from the specified JSON feed
+ * by inserting the cells into a new 'table' 
+ * element in the DOM.  Each 'tr' represents a 
+ * row in the spreadsheet, and each 'td' is a cell
+ * within that row.
+ */
+function cellEntries(json) {
+
+  removeOldResults();
+
+  var table = document.createElement('table');
+  table.setAttribute('id', 'output');
+  var tbody = document.createElement('tbody');
+  
+  var tr;
+  
+  for (var i=0; i < json.feed.entry.length; i++) {
+
+    var entry = json.feed.entry[i];
+    if (entry.gs$cell.col == '1') {
+      if (tr != null) {
+        tbody.appendChild(tr);
+      }
+
+      tr = document.createElement('tr');
+    }
+    
+    var td = document.createElement('td');
+    td.appendChild(document.createTextNode(entry.content.$t));
+    tr.appendChild(td);
+  } 
+ 
+  tbody.appendChild(tr);
+  table.appendChild(tbody);
+  document.getElementById('data').appendChild(table);
+
+  // Re-enable the ok button.
+  var ok_button = document.getElementById('ok_button');
+  ok_button.removeAttribute('disabled');
+}
+
+/**
+ * Called when the user clicks the 'OK' button to
+ * retrieve a spreadsheet's JSON feed.  Creates a new 
+ * script element in the DOM whose source is the JSON feed, 
+ * and specifies that the callback function is 
+ * 'listEntries' for a list feed and 'cellEntries' for a
+ * cells feed (above).
+ */
+function displayResults(query) {
+  removeOldJSONScriptNodes();
+  removeOldResults();
+
+  // Show a "Loading..." indicator.
+  var div = document.getElementById('data');
+  var p = document.createElement('p');
+  p.appendChild(document.createTextNode('Loading...'));
+  div.appendChild(p);
+  
+  // Disable the OK button
+  var ok_button = document.getElementById('ok_button');
+  ok_button.disabled = 'true';
+
+  // Retrieve the JSON feed.
+  var script = document.createElement('script');
+
+  if (query.feed.options[query.feed.selectedIndex].text == 'list') {
+    script.setAttribute('src', 'http://spreadsheets.google.com/feeds/'
+                         + query.feed.options[query.feed.selectedIndex].text 
+                         + '/' + query.key.value 
+                         + '/' + query.worksheet.value + '/public/values' +
+                        '?alt=json-in-script&callback=listEntries');
+  }
+
+  if (query.feed.options[query.feed.selectedIndex].text == 'cells') {
+    script.setAttribute('src', 'http://spreadsheets.google.com/feeds/'
+                         + query.feed.options[query.feed.selectedIndex].text 
+                         + '/' + query.key.value 
+                         + '/' + query.worksheet.value + '/public/values' +
+                        '?alt=json-in-script&callback=cellEntries');
+  }
+  
+  script.setAttribute('id', 'jsonScript');
+  script.setAttribute('type', 'text/javascript');
+  document.documentElement.firstChild.appendChild(script);;
+}
+
+/**
+ * Removes the script element from the previous result.
+ */
+function removeOldJSONScriptNodes() {
+  var jsonScript = document.getElementById('jsonScript');
+  if (jsonScript) {
+    jsonScript.parentNode.removeChild(jsonScript);
+  }
+}
+
+/**
+ * Removes the output generated from the previous result.
+ */
+function removeOldResults() {
+  var div = document.getElementById('data');
+  if (div.firstChild) {
+    div.removeChild(div.firstChild);
+  }
+}
+//-->
+</script>
+
+<form onsubmit="return false">
+<p>Spreadsheet: http://spreadsheets.google.com/feeds/
+<select name="feed">
+  <option>list</option>
+  <option>cells</option>
+</select>/
+<input type="text" name="key" size="44" maxlength="43"
+value="o13394135408524254648.240766968415752635">/
+<input type="text" name="worksheet" size="4" value="od6">/public/values&nbsp;
+<button id='ok_button'
+onclick="displayResults(this.form);">OK</button>
+</p></form>
+
+<div id="data"></div>
+
+</body>
+</html>
